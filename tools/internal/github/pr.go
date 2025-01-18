@@ -43,7 +43,10 @@ func (c *Repo) apiClient() *github.Client {
 	if c.client == nil {
 		c.client = github.NewClient(nil)
 		if token := os.Getenv("GITHUB_TOKEN"); token != "" {
+			fmt.Println("using token")
 			c.client = c.client.WithAuthToken(token)
+		} else {
+			fmt.Println("no token set")
 		}
 	}
 	return c.client
